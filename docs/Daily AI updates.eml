@@ -1,0 +1,2145 @@
+Delivered-To: kiranpreet2278@gmail.com
+Received: by 2002:a17:906:231a:b0:bea:db31:8f37 with SMTP id l26csp2303965eja;
+        Fri, 26 Jun 2026 10:44:44 -0700 (PDT)
+X-Received: by 2002:a05:6a00:1f19:b0:845:d2e3:b9c6 with SMTP id d2e1a72fcca58-845d2e3bb09mr852253b3a.26.1782495884117;
+        Fri, 26 Jun 2026 10:44:44 -0700 (PDT)
+ARC-Seal: i=2; a=rsa-sha256; t=1782495884; cv=pass;
+        d=google.com; s=arc-20260327;
+        b=qgUr9+oCy04AqnArsE6zE2u+Mj0dd9jhVz9viqsa/q4pPcwuFvL0+dQUksUfUvdScn
+         4zSJxLbAlTvuqMuTzdNnl0I0Gypa5JfbmbmVwJ0S71RnUP0Sx8h+zIwrap2r04+9Tt3o
+         hVsapiZC46GguWZq6VfjqVY7O/vJAcNjaXAjmqabHq8YPyXpyDAjai1QAhs0fKy8U834
+         VFQxQ7CIr/UUjfgPzdqWwjgXOkrjEFILf04fsnTr6alEkcQIjLhhOWDEMhE8NGjLA0qD
+         fUhjMXf5j0OxhRTRGKyemOJ72OUQUmMilEhLtSyuEyAFNdOIJm/GxWMh+nH/P+1xqfxp
+         jV9A==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=request-id:client-request-id:content-transfer-encoding:mime-version
+         :message-id:date:subject:to:reply-to:from:sender:dkim-signature;
+        bh=BKcFMLJrrPcx4Au7XxFrKKOkW1J/Tgw1EMrohJxXI8U=;
+        fh=PA1JdKS2ERVl13m38koCEvNVUg3IqX/2Np9XeG4O4X0=;
+        b=FPtSJsz/lPEA/Mnd1v/D0tXE2rAg9nhmXvxEOFsZ5S1EwXt/ULOsd36E9I+nH6PUR1
+         vKcjs/S8q+5AOAq9xcAXBKtYz4LfOO1QPGRt/AjnQjXkn4/HXWeUWHRTlpJnGVQK5cIv
+         vN1MtjCfeuCrXPPLDcEykPK1xjK65ODa2eRj6Aw+pThzfUpbLvUmT7CTjspkb2fiMogM
+         7yyvWp0GzxG7KpfAktnPjZfI9pAmVPUR6uzxTzxhLzabGXtC74c0DppckkedSu3Rb0rX
+         1eynMr/FluDaSWBy9ldLSbvTg0LjSPJeUIC0skDlou/27Mxt3d7yp8NKRFv1tOBzyI3O
+         PYeQ==;
+        dara=google.com
+ARC-Authentication-Results: i=2; mx.google.com;
+       dkim=pass header.i=@powerapps.com header.s=selector1-azurecomm-prod-net header.b=tgV1IBwK;
+       arc=pass (i=1);
+       spf=pass (google.com: domain of microsoft@powerapps.com designates 2a01:111:f403:c111::9 as permitted sender) smtp.mailfrom=microsoft@powerapps.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=powerapps.com
+Return-Path: <microsoft@powerapps.com>
+Received: from DM5PR21CU001.outbound.protection.outlook.com (mail-centralusazlp170110009.outbound.protection.outlook.com. [2a01:111:f403:c111::9])
+        by mx.google.com with ESMTPS id d2e1a72fcca58-845b8830d44si10351480b3a.151.2026.06.26.10.44.43
+        for <kiranpreet2278@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 26 Jun 2026 10:44:44 -0700 (PDT)
+Received-SPF: pass (google.com: domain of microsoft@powerapps.com designates 2a01:111:f403:c111::9 as permitted sender) client-ip=2a01:111:f403:c111::9;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@powerapps.com header.s=selector1-azurecomm-prod-net header.b=tgV1IBwK;
+       arc=pass (i=1);
+       spf=pass (google.com: domain of microsoft@powerapps.com designates 2a01:111:f403:c111::9 as permitted sender) smtp.mailfrom=microsoft@powerapps.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=powerapps.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=YJZrTAXCdcdT0zw6tjwLch+CG7Ydq10Y5oDAVlyNy5GOcxhEV552VZsTtBhjI3FX97khl2TVe11zaq3KoXGV5d+mOtbcofcsjOgby97BPfQEOh7cxaZUGLI+TuTTISGu/wcUapkGMG4qFJmR4ItVjyLOj3VYHXJkSBdPqANff3XbmCh+qTSL6xASd+X3tVOD7k24YlcSyj3p68u88Xjbw1Ivw6qpleEvTdy1zD5zU0nPPg9ilspzKvWu72EcwDsdd1UKQNJq01RTM8yBzP70N1Fcws8BZ/f2br5BmN6vMNSG9xOa8/cg3LGbp/WPjVATvhzQSeNdIg13wwYzuMJgbw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001; h=From:Date:Subject:Message-ID:MIME-Version;
+ bh=BKcFMLJrrPcx4Au7XxFrKKOkW1J/Tgw1EMrohJxXI8U=;
+ b=JTuXpXyOjLvkpH4cITIDOaaYNvrHBf/pRs8aG5ytxRtJd5qkriQM0tH10cWpB2FikQudo2G0uYrDj7FRhvKHn6LrmnUUejjThvivoCO8ZqrFwc/8uS9VX7ZK6AtvwNGKQSrolPNyyYkFk3ljuGV9v1PTb+KIlYYF7tbdQMNNMY161uwbyVhFvRLJFv0Q0XcR7OmGMHrC6kRN6/O/8NFbpzqXbB00OJSh1/WulvZMxhT20ifXk2Jr+EJ0XjHIaMpAYSppYSjCzKl1q/Ux86T20A6Xo2ejbjfE42nm6jidT9/0hJZGpye8KXYk05Cne8NcPUlnjf4TYIsSppTwSI8raw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+Received: from substrate.office.com (2603:10b6:610:147::15) by
+ CH3PR05MB9435.namprd05.prod.outlook.com with HTTP via
+ BL1PR13CA0131.NAMPRD13.PROD.OUTLOOK.COM; Fri, 26 Jun 2026 17:44:40 +0000
+DKIM-Signature: v=1; a=rsa-sha256; d=powerapps.com;
+	s=selector1-azurecomm-prod-net; c=relaxed/relaxed; t=1782495880;
+	h=from:to:cc:subject:date:messageid;
+	bh=BKcFMLJrrPcx4Au7XxFrKKOkW1J/Tgw1EMrohJxXI8U=;
+	b=tgV1IBwKUsCk6qXNkPJYOkF3Fi4PVvUeZPR+dOCxddceApWqmN3Ob8MblLod5e51jTwhK5LWqmI
+	/Z70KbHQIYPIqRTRzzghTrKnbCnbWgWui2rdJ3ma5Sk0k87p5dFjNi1Dw4R5MruQBnb1rgARGTLr0
+	3oonS/Q1yYymdWeLHholEcN+5U3hPT8cT1mx/qpgcq0uzbxL/GAtXEx8zx2Bj7k2AIQW6/7pZbcaw
+	lPKXYWFRlfFmnZY8uZHgrcXqErQYrCSGr+S3W7tFPmb3pfp00GV8XV075lsf3mvVHNOtqVHv4xu6G
+	ZARSdz16dM2/HjFimMhZOIMoU+DG1j7Jj2RA==
+Sender: Microsoft Power Apps and Power Automate <microsoft@powerapps.com>
+From: Microsoft Power Apps and Power Automate <microsoft@powerapps.com>
+Reply-To: Microsoft Power Apps and Power Automate <microsoft@powerapps.com>
+To: kiranpreet2278 <kiranpreet2278@gmail.com>
+Subject: Daily AI updates
+Date: Fri, 26 Jun 2026 17:44:40 +0000
+Message-ID: <202606261744.ce28ca05213b495085183190f059d2eb-OBZG6ZD4IFBVGRKNIFEUYLLQOJXWILRUMU2WMMBVMEYC2NRSMI3C2NBSHBTC2YJQGRRC2MRTGQ3DEMLGGEYGKMDDPRZW25DQ@microsoft.com>
+MIME-Version: 1.0
+X-TsbHttpDeliveryResponseType: Success
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+client-request-id: ce28ca05-213b-4950-8518-3190f059d2eb
+request-id: ce28ca05-213b-4950-8518-3190f059d2eb
+Return-Path: microsoft@powerapps.com
+X-MS-TrafficTypeDiagnostic: CH3PR05MB9435:EE_ACSPROD
+X-MS-Exchange-SenderADCheck: 0
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|61400799027|4022899009|376014|18002099003|16102099003|13003099007|6133799003|19003699004|3023799007|56012099006|5023799004|20046099003|16056099006|8096899003;
+X-Microsoft-Antispam-Message-Info:
+	Bj6Pl8Gvte/gZhfDuSmSJ1idaFvWOn3n6jnJkihQRjbpDkilglAA2nxNW/oJTtJf6CoEKL1ObYdWD7/UXulGTDS3RwjfcmlXhZGwbJkh/igrv1R4Zqn4dK+kzp6vuaVo81DzY7BpJNLmHG+B8zJvnviecUGAACARuRn5FXBlTyLRD+VU7IhT+NoFgFKHmYL41i8wVe2EDmCMiGC9kwaeijz53P8t21UBJrl+x5duKKEaaYVyQdt/xBlVcZVK0QGvKIl3G7UMz1qsOtBhrUM616gt+8L3sBtUQQrtCsl4gkO73OF5BD3860biEtz8Zk9K2tgzFR2mg3uDL1yyXRjAmZ538VoflvTnO/N1ULDSlC+DGDYWve5KYsmqbUqDYIe77tvhf1ZAwDvMktDpgQtoNgIzpcsWzbL7CRMdnH8FPQFsU0GYmnfmmybwhxGauMymWcLg/UpoRG4y+Tjt0GnXkhrreI+zTvuEFmqZNcUmOhFHEr9/2G0sjhRvOu8nYMJfZjJLbJBV3OOYoXXRA0ID71jMiAUgpfcC9VNtCRQ1rnbeuETIewnbMbokNJLr5qDKaiTGY0FdmvJ+mAB3Dfx9Z+v2PbeQMH1gLYD4AcUgS5c=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:;PTR:;CAT:NONE;SFS:(13230040)(61400799027)(4022899009)(376014)(18002099003)(16102099003)(13003099007)(6133799003)(19003699004)(3023799007)(56012099006)(5023799004)(20046099003)(16056099006)(8096899003);DIR:OUT;SFP:1021;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	HMwdIpNc4cQVmwfMuAapzkuvePiWHvQtZyd4bE0bdVDIYHROsYz/0X/RXOybiPyS6n9vLupLKcMrt8k2/T+0vQek2jznP803Ks5Fd8dd3a7oqYKePpMkjNknYurzXFE+h1L4jg6VeGAWMK+oFLNobyQT+ZNwKTpEW/JTES3Zgml0LGKjDPy72GRkc7rogYyRDplG4nIJ8Eo2NsSWhObEYkED733DmCmsU+r01PBq/UXhJnPrTOQllrLAetkHJdzN3iqgguUc5t6LoHGLyxxLa/NLSyg0VE80Xo8Y0MPitSZgYbmMZ4KzOpqAyLrYJSVTElEmQN7AUTKBOHwRhQu6WtvV6C8L1KWIUBKsgcuKLeWxmwuZ/x0KypUzzn+gj4cK+WJU8et7xGBJKOnnSor/55hhOY393eMKBQbAxYfCckcwZuTNAXEY3z4/BFs81ub2pGaqYFYVgcVH2pkdtMSDSEp2Ta+8veKI8i3iKtbT03tJTisd3xZ50EWg4s8cv+dDseqtUtyi1xfEuNY9EfZ76k+bPALUKzoeFb0XfIAXCzSdf7X/V2DeAGOyrUizidkIqxTYmCSXdG3dTmywc/qX0FtXzX24gT6gqLAXEjUrc08Qktfj+5mlxnRc5qHwX6HCTYo6rcDi8NJkYuBDRIJkBu6eYe9J/AAWstxD08oUC94T8Id5Xyay4IjN609q5vASPIi+iAuXP9rgBirdZibSbw==
+X-OriginatorOrg: acsemailus4.onmicrosoft.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: HttpSubmission-CH3PR05MB9435
+X-MS-Exchange-CrossTenant-Id: cd60c5ab-dc13-496a-9b5a-bd426d6a0a29
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2026 17:44:40.9412 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id:
+	01ab5133-8516-4faa-382b-08ded3aa99b6
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR05MB9435
+
+<p class=3D"editor-paragraph"><div style=3D"font-family: Arial, sans-serif;=
+ background-color:#f4f6f8; padding:20px;">
+  <div style=3D"max-width:700px; margin:auto; background-color:#ffffff; pad=
+ding:25px; border-radius:10px;">
+
+    <h1 style=3D"font-size:28px; color:#111827; margin-bottom:5px;">
+      Daily AI Briefing
+    </h1>
+
+    <p style=3D"font-size:15px; color:#6b7280; margin-top:0;">
+      Your morning digest of the most relevant AI updates, simplified for q=
+uick reading.
+    </p>
+
+    <hr style=3D"border:none; border-top:1px solid #e5e7eb; margin:20px 0;"=
+><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:18px; =
+margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   OpenAI
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  Previewing GPT-5.6 Sol: a next-generation model
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>OpenAI has previewed GPT-5.6 Sol, a next-generation AI model with enh=
+anced abilities in coding, science, and cybersecurity.</li>
+  <li>This matters because it represents a significant advancement in AI te=
+chnology, improving performance and safety.</li>
+  <li>The development affects developers, researchers, cybersecurity profes=
+sionals, and users relying on AI tools.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards more specialized, powerful models that integrate=
+ advanced safety features to handle complex tasks.</li>
+  <li>A practical lesson for learners is to focus on understanding AI safet=
+y and domain-specific applications to leverage new models effectively.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Safety stack refers to a set of technologies and protocols designed t=
+o ensure AI systems operate securely and ethically, minimizing risks and ha=
+rmful outputs.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/previewing-gpt-5-6-sol"style=3D"bac=
+kground-color:#2563eb; color:#ffffff; padding:10px 14px; text-decoration:no=
+ne; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   OpenAI
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  How agents are transforming work
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>AI agents are transforming work by enabling longer and more complex t=
+asks.</li>
+  <li>This matters because it expands productivity across various roles.</l=
+i>
+  <li>Workers in many different job functions are affected by these changes=
+.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards handling increasingly complex and extended tasks=
+ autonomously.</li>
+  <li>Learners should focus on understanding how to collaborate effectively=
+ with AI agents to enhance productivity.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>An AI agent is a software program designed to perform tasks autonomou=
+sly by perceiving its environment and making decisions to achieve specific =
+goals.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/how-agents-are-transforming-work"st=
+yle=3D"background-color:#2563eb; color:#ffffff; padding:10px 14px; text-dec=
+oration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   OpenAI
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  OpenAI and Broadcom unveil LLM-optimized inference chip
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>OpenAI and Broadcom have introduced Jalape=C3=B1o, a custom AI chip d=
+esigned specifically for large language model (LLM) inference.</li>
+  <li>This development matters because it aims to enhance the performance, =
+efficiency, and scalability of AI systems using LLMs.</li>
+  <li>The advancement affects AI developers, companies deploying AI solutio=
+ns, and end-users benefiting from faster and more efficient AI applications=
+.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI hardware is evolving towards specialized chips that optimize the p=
+rocessing of complex models like LLMs to meet growing computational demands=
+.</li>
+  <li>A practical lesson for learners is to understand the importance of ha=
+rdware-software co-design in improving AI system capabilities.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Inference in AI refers to the process where a trained model makes pre=
+dictions or generates outputs based on new input data, and specialized chip=
+s like Jalape=C3=B1o are designed to perform this task more efficiently.</l=
+i>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/openai-broadcom-jalapeno-inference-=
+chip"style=3D"background-color:#2563eb; color:#ffffff; padding:10px 14px; t=
+ext-decoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   GoogleAI
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  New research shows how AMIE, our medical AI, could help manage health con=
+ditions.
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>New research demonstrates that AMIE, a conversational medical AI, can=
+ manage complex diseases as effectively as primary care physicians.</li>
+  <li>This matters because it highlights the potential for AI to support he=
+althcare delivery and improve patient management.</li>
+  <li>Patients with complex health conditions and healthcare providers are =
+directly affected by this advancement.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is advancing towards becoming a reliable partner in healthcare, ca=
+pable of handling complex medical tasks alongside human professionals.</li>
+  <li>A practical lesson for learners is to understand how AI can augment h=
+uman expertise rather than replace it, especially in critical fields like m=
+edicine.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Conversational AI refers to computer systems designed to understand a=
+nd respond to human language in a natural way, enabling interactive communi=
+cation similar to talking with a person.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://blog.google/innovation-and-ai/models-and-research/go=
+ogle-research/amie-for-disease-management-in-nature/"style=3D"background-co=
+lor:#2563eb; color:#ffffff; padding:10px 14px; text-decoration:none; border=
+-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   GoogleAI
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  The latest AI news we announced in May 2026
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>Google announced its latest AI updates in May 2026.</li>
+  <li>These updates highlight ongoing advancements in AI technology that ca=
+n impact various industries.</li>
+  <li>Developers, businesses, and users of AI technologies are affected by =
+these changes.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards more integrated and advanced capabilities that e=
+nhance user experience and productivity.</li>
+  <li>Learners should focus on understanding how AI tools evolve to better =
+apply them in real-world scenarios.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Machine learning is a method where computers learn from data to make =
+decisions or predictions without being explicitly programmed for each task.=
+</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://blog.google/innovation-and-ai/technology/ai/google-a=
+i-updates-may-2026/"style=3D"background-color:#2563eb; color:#ffffff; paddi=
+ng:10px 14px; text-decoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   GoogleAI
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  5 ways Google Search can level up your thrift and vintage shopping
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>Google Search now includes AI tools to help users find thrift and vin=
+tage items more easily.</li>
+  <li>This advancement matters because it enhances the shopping experience =
+for those interested in sustainable and unique fashion choices.</li>
+  <li>Shoppers looking for second-hand and vintage goods are the primary gr=
+oup affected by these improvements.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is increasingly being integrated into everyday tools to personaliz=
+e and improve user experiences in niche areas like thrift shopping.</li>
+  <li>A practical lesson for learners is to explore how AI-powered search f=
+eatures can save time and uncover hidden gems in specialized markets.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>AI in search uses machine learning algorithms to understand user quer=
+ies better and match them with relevant results, making it easier to find s=
+pecific items like vintage clothing.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://blog.google/products-and-platforms/products/search/t=
+hrifting-tips/"style=3D"background-color:#2563eb; color:#ffffff; padding:10=
+px 14px; text-decoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   GoogleAI
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  How we used Gemini to build Google I/O 2026
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>Google used Gemini AI technology to help produce the Google I/O 2026 =
+event.</li>
+  <li>This matters because it showcases how AI can enhance large-scale even=
+t production and innovation.</li>
+  <li>The event organizers, attendees, and the broader tech community are a=
+ffected by these advancements.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is advancing towards becoming an integral tool in creative and org=
+anizational processes.</li>
+  <li>A practical lesson for learners is to explore how AI can be applied t=
+o streamline complex projects.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Gemini is an AI system designed to assist with tasks by understanding=
+ and generating content, making complex workflows more efficient.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://blog.google/innovation-and-ai/technology/ai/io-2026-=
+google-ai/"style=3D"background-color:#2563eb; color:#ffffff; padding:10px 1=
+4px; text-decoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   GoogleAI
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  Take our I/O 2026 quiz, vibe coded in Google AI Studio.
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>Google AI Studio was used to create a quiz about the top announcement=
+s from I/O 2026.</li>
+  <li>This matters because it showcases how AI tools can be used to engage =
+users interactively with event content.</li>
+  <li>The quiz affects users interested in Google I/O and AI technology ent=
+husiasts.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is increasingly being integrated into creative and interactive con=
+tent development to enhance user engagement.</li>
+  <li>A practical lesson for learners is to explore AI platforms like Googl=
+e AI Studio to create innovative projects and applications.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Vibe coding in AI refers to using AI tools to generate or design cont=
+ent that matches a certain style or theme automatically.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://blog.google/innovation-and-ai/technology/ai/io-2026-=
+vibe-coded-quiz/"style=3D"background-color:#2563eb; color:#ffffff; padding:=
+10px 14px; text-decoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   GoogleAI
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  9 demos of Gemini Omni and Gemini 3.5 in action
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>Google showcased 9 demos of Gemini Omni and Gemini 3.5 at Google I/O =
+2026.</li>
+  <li>This demonstration highlights advancements in AI technology and its p=
+ractical applications.</li>
+  <li>Developers, tech enthusiasts, and users interested in AI innovations =
+are affected.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is progressing towards more integrated and versatile systems capab=
+le of handling diverse tasks.</li>
+  <li>Learners should focus on understanding how AI models can be applied i=
+n real-world scenarios to maximize their impact.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Gemini Omni likely refers to a multi-modal AI system that can process=
+ and generate information across different types of data, such as text, ima=
+ges, and videos, making AI interactions more natural and comprehensive.</li=
+>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://blog.google/innovation-and-ai/models-and-research/ge=
+mini-models/gemini-omni-3-5-videos/"style=3D"background-color:#2563eb; colo=
+r:#ffffff; padding:10px 14px; text-decoration:none; border-radius:6px; font=
+-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   GoogleAI
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  Check out real-life AI prototypes from the Futures Lab.
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>University of Waterloo students have developed AI prototypes such as =
+sign language tutors.</li>
+  <li>This matters because these AI tools have the potential to transform e=
+ducation and work environments.</li>
+  <li>Students, educators, and workers are the primary groups affected by t=
+hese innovations.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is advancing towards creating practical, real-world applications t=
+hat enhance learning and communication.</li>
+  <li>A practical lesson for learners is to explore how AI can be used to s=
+upport accessibility and personalized education.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>An AI prototype like a sign language tutor uses machine learning to r=
+ecognize and interpret hand gestures, helping users learn sign language mor=
+e effectively.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://blog.google/innovation-and-ai/technology/ai/universi=
+ty-waterloo-labs/"style=3D"background-color:#2563eb; color:#ffffff; padding=
+:10px 14px; text-decoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   GoogleAI
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  Catch up on 12 major I/O 2026 moments
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>Google I/O 2026 featured 12 major announcements, including updates on=
+ Gemini Omni and Gemini 3.5 Flash.</li>
+  <li>These developments highlight Google's advancements in AI technology a=
+nd innovation.</li>
+  <li>Developers, tech enthusiasts, and users of Google's AI products are d=
+irectly impacted.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is progressing towards more integrated and powerful systems that e=
+nhance user experience and capabilities.</li>
+  <li>Learners should focus on understanding emerging AI tools and platform=
+s to stay current in the field.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Gemini Omni likely refers to a sophisticated AI model or system desig=
+ned to perform multiple tasks efficiently by combining various AI technique=
+s.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://blog.google/innovation-and-ai/technology/ai/io-2026-=
+keynote-moment-videos/"style=3D"background-color:#2563eb; color:#ffffff; pa=
+dding:10px 14px; text-decoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   GoogleAI
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  Catch up on the Dialogues stage at Google I/O 2026.
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>The 2026 I/O Dialogues featured leaders discussing advancements in AI=
+, quantum computing, robotics, and creativity.</li>
+  <li>This matters because these technologies are shaping the future of inn=
+ovation and human interaction.</li>
+  <li>Technology developers, businesses, and society at large are affected =
+by these discussions and developments.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards deeper integration with other advanced technolog=
+ies to enhance creativity and problem-solving.</li>
+  <li>A practical lesson for learners is to stay updated on emerging techno=
+logies and their interdisciplinary applications.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Quantum computing uses principles of quantum mechanics to process inf=
+ormation in ways that traditional computers cannot, enabling faster problem=
+-solving for certain complex tasks.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://blog.google/innovation-and-ai/technology/ai/io-2026-=
+dialogues-recap/"style=3D"background-color:#2563eb; color:#ffffff; padding:=
+10px 14px; text-decoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   GoogleAI
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  How AI Mode is changing the way people search in the U.S.
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>AI Mode is changing how people in the U.S. search by shifting from ke=
+yword-based queries to natural language queries.</li>
+  <li>This shift matters because it makes searching more intuitive and user=
+-friendly, improving the overall search experience.</li>
+  <li>Users of search engines in the U.S. are the ones affected by this cha=
+nge.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards understanding and processing natural language to=
+ better interpret user intent.</li>
+  <li>A practical lesson for learners is to focus on developing skills in n=
+atural language processing and user-centered design.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Natural language queries allow users to search using everyday languag=
+e instead of specific keywords, enabling AI to understand context and inten=
+t more effectively.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://blog.google/products-and-platforms/products/search/a=
+i-mode-us-insights/"style=3D"background-color:#2563eb; color:#ffffff; paddi=
+ng:10px 14px; text-decoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   GoogleAI
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  New ways to create and get things done in Google Workspace
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>Google Workspace introduced new voice capabilities in Gmail, Docs, an=
+d Keep, along with a new design tool called Google Pics and updates to AI I=
+nbox.</li>
+  <li>These updates enhance productivity and streamline how users create an=
+d manage content using AI and voice technology.</li>
+  <li>Users of Google Workspace, including professionals, students, and bus=
+inesses, are affected by these improvements.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is increasingly integrated into everyday productivity tools to mak=
+e tasks faster and more intuitive.</li>
+  <li>A practical lesson for learners is to explore and adopt AI-powered fe=
+atures to improve efficiency in their workflows.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Voice capabilities in software allow users to control and input infor=
+mation using spoken commands, making interaction with digital tools more na=
+tural and hands-free.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://blog.google/products-and-platforms/products/workspac=
+e/workspace-updates/"style=3D"background-color:#2563eb; color:#ffffff; padd=
+ing:10px 14px; text-decoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   GoogleAI
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  I/O 2026: Welcome to the agentic Gemini era
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>Google I/O 2026 introduced the new agentic Gemini AI era.</li>
+  <li>This matters because Gemini aims to enhance productivity by enabling =
+more advanced AI assistance.</li>
+  <li>Users and developers who rely on AI tools are directly affected by th=
+ese advancements.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards more autonomous and capable agents that can perf=
+orm complex tasks independently.</li>
+  <li>A practical lesson for learners is to focus on understanding how AI a=
+gents can integrate with daily workflows to improve efficiency.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>An agentic AI is a system designed to act autonomously, making decisi=
+ons and performing tasks on behalf of users without constant input.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://blog.google/innovation-and-ai/sundar-pichai-io-2026/=
+"style=3D"background-color:#2563eb; color:#ffffff; padding:10px 14px; text-=
+decoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   GoogleAI
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  Gemini 3.5: frontier intelligence with action
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>Google released Gemini 3.5, a new series of AI models that combine ad=
+vanced intelligence with the ability to take action.</li>
+  <li>This matters because it represents a step forward in AI capabilities,=
+ integrating understanding with practical execution.</li>
+  <li>Developers, businesses, and users of AI technologies are affected by =
+this advancement.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards more integrated systems that not only understand=
+ information but can also perform actions based on that understanding.</li>
+  <li>A practical lesson for learners is to focus on both AI reasoning and =
+its application to real-world tasks.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Frontier intelligence refers to cutting-edge AI that can process comp=
+lex information and make decisions, while action capability means the AI ca=
+n execute tasks or commands based on that intelligence.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://blog.google/innovation-and-ai/models-and-research/ge=
+mini-models/gemini-3-5/"style=3D"background-color:#2563eb; color:#ffffff; p=
+adding:10px 14px; text-decoration:none; border-radius:6px; font-size:14px;"=
+>
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   GoogleAI
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  A new era for AI Search
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>A new development combines the strengths of search engines and AI tec=
+hnology.</li>
+  <li>This matters because it enhances how people find and interact with in=
+formation online.</li>
+  <li>Users of search engines and AI-powered tools are directly affected by=
+ this advancement.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards more integrated and intelligent systems that imp=
+rove user experience in information retrieval.</li>
+  <li>A practical lesson for learners is to stay updated on AI advancements=
+ to leverage new tools effectively.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>AI search combines traditional keyword-based search with AI's ability=
+ to understand context and provide more relevant, conversational answers.</=
+li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://blog.google/products-and-platforms/products/search/s=
+earch-io-2026/"style=3D"background-color:#2563eb; color:#ffffff; padding:10=
+px 14px; text-decoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  Previewing GPT-5.6 Sol: a next-generation model
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>OpenAI has previewed GPT-5.6 Sol, a next-generation AI model with enh=
+anced abilities in coding, science, and cybersecurity.</li>
+  <li>This matters because it represents a significant advancement in AI te=
+chnology, improving performance and safety.</li>
+  <li>The development affects developers, researchers, cybersecurity profes=
+sionals, and users relying on AI tools.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards more specialized and safer models that can handl=
+e complex tasks across various domains.</li>
+  <li>A practical lesson for learners is to focus on understanding AI safet=
+y and domain-specific applications to leverage new models effectively.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>AI safety stacks are systems designed to ensure that AI models operat=
+e reliably and securely, minimizing risks and harmful outputs.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/previewing-gpt-5-6-sol"style=3D"bac=
+kground-color:#2563eb; color:#ffffff; padding:10px 14px; text-decoration:no=
+ne; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  How agents are transforming work
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>AI agents are transforming work by enabling longer and more complex t=
+asks.</li>
+  <li>This transformation matters because it expands productivity across va=
+rious roles.</li>
+  <li>Workers in many different job roles are affected by these changes.</l=
+i>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards handling increasingly complex and extended tasks=
+ autonomously.</li>
+  <li>Learners should focus on understanding how to collaborate effectively=
+ with AI agents to enhance productivity.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>An AI agent is a software program designed to perform tasks autonomou=
+sly by perceiving its environment and making decisions to achieve specific =
+goals.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/how-agents-are-transforming-work"st=
+yle=3D"background-color:#2563eb; color:#ffffff; padding:10px 14px; text-dec=
+oration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  OpenAI and Broadcom unveil LLM-optimized inference chip
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>OpenAI and Broadcom have introduced Jalape=C3=B1o, a custom AI chip d=
+esigned specifically for large language model (LLM) inference.</li>
+  <li>This development matters because it aims to enhance the performance, =
+efficiency, and scalability of AI systems using LLMs.</li>
+  <li>The advancement affects AI developers, companies deploying AI solutio=
+ns, and end-users benefiting from faster and more efficient AI applications=
+.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI hardware is evolving to become more specialized, focusing on optim=
+izing specific tasks like LLM inference to meet growing computational deman=
+ds.</li>
+  <li>A practical lesson for learners is to understand the importance of ha=
+rdware-software co-design in improving AI system performance.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>LLM inference refers to the process where a trained large language mo=
+del generates predictions or outputs based on new input data, and specializ=
+ed chips like Jalape=C3=B1o are designed to perform this task faster and mo=
+re efficiently.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/openai-broadcom-jalapeno-inference-=
+chip"style=3D"background-color:#2563eb; color:#ffffff; padding:10px 14px; t=
+ext-decoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  Helping build shared standards for advanced AI
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>OpenAI is contributing to the development of shared standards for adv=
+anced AI.</li>
+  <li>This matters because establishing common evaluation frameworks and sa=
+fety practices promotes responsible AI development worldwide.</li>
+  <li>AI developers, users, and global communities are affected by these co=
+llaborative efforts.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards greater global cooperation and standardized safe=
+ty measures to ensure beneficial outcomes.</li>
+  <li>A practical lesson for learners is to understand the importance of et=
+hical standards and collaboration in AI development.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Evaluation frameworks are structured methods used to assess AI system=
+s' performance and safety to ensure they meet agreed-upon standards.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/helping-build-shared-standards-for-=
+advanced-ai"style=3D"background-color:#2563eb; color:#ffffff; padding:10px =
+14px; text-decoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  How GPT-5 helped immunologist Derya Unutmaz solve a 3-year-old mystery
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>GPT-5 Pro helped immunologist Derya Unutmaz solve a 3-year-old myster=
+y about T cell behavior.</li>
+  <li>This matters because it could advance research in cancer and autoimmu=
+ne diseases.</li>
+  <li>Researchers and patients affected by cancer and autoimmune conditions=
+ are impacted.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is advancing to assist in complex scientific discoveries and medic=
+al research.</li>
+  <li>Learners should focus on how AI can be integrated into their field to=
+ solve challenging problems.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>GPT-5 Pro is an advanced AI model that processes and analyzes large a=
+mounts of data to generate insights and solve complex questions.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/gpt-5-immunology-mystery"style=3D"b=
+ackground-color:#2563eb; color:#ffffff; padding:10px 14px; text-decoration:=
+none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  How Omio is building the future of conversational travel
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>Omio is leveraging OpenAI to create conversational travel experiences=
+ and speed up product development.</li>
+  <li>This matters because it shows how AI can transform traditional indust=
+ries into AI-native companies, enhancing user interaction and innovation.</=
+li>
+  <li>Travelers and the travel industry are affected by these advancements =
+in AI-powered services.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards deeper integration in everyday services, making =
+interactions more natural and efficient.</li>
+  <li>A practical lesson for learners is to explore how AI can be applied t=
+o improve user experience and streamline development processes.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Conversational AI uses natural language processing to understand and =
+respond to human language, enabling more intuitive communication between us=
+ers and machines.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/omio"style=3D"background-color:#256=
+3eb; color:#ffffff; padding:10px 14px; text-decoration:none; border-radius:=
+6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  Patch the Planet: a Daybreak initiative to support open source maintainer=
+s
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>OpenAI launched Patch the Planet, a Daybreak initiative to assist ope=
+n-source maintainers in identifying and fixing vulnerabilities using AI and=
+ expert review.</li>
+  <li>This matters because it enhances the security and reliability of open=
+-source software, which is widely used across the tech industry.</li>
+  <li>Open-source maintainers and the broader software development communit=
+y are directly affected by this initiative.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is increasingly being integrated into software development workflo=
+ws to improve security and efficiency.</li>
+  <li>A practical lesson for learners is to leverage AI tools alongside exp=
+ert knowledge to enhance code quality and security.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Vulnerabilities in software are weaknesses that can be exploited by a=
+ttackers, and AI can help detect these by analyzing code patterns and behav=
+iors that might indicate security risks.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/patch-the-planet"style=3D"backgroun=
+d-color:#2563eb; color:#ffffff; padding:10px 14px; text-decoration:none; bo=
+rder-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  Daybreak: Tools for securing every organization in the world
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>OpenAI has introduced new security tools called Daybreak, including C=
+odex Security and GPT-5.5-Cyber, to help organizations identify and fix vul=
+nerabilities.</li>
+  <li>This matters because it enhances cybersecurity by enabling organizati=
+ons to protect themselves more effectively against threats.</li>
+  <li>Organizations worldwide and their security teams are directly affecte=
+d by these new tools.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is advancing towards providing specialized, scalable solutions for=
+ complex security challenges in organizations.</li>
+  <li>A practical lesson for learners is to understand how AI can automate =
+vulnerability detection and remediation to improve cybersecurity.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Vulnerability scanning is a process where software automatically chec=
+ks systems for security weaknesses that could be exploited by attackers.</l=
+i>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/daybreak-securing-the-world"style=3D=
+"background-color:#2563eb; color:#ffffff; padding:10px 14px; text-decoratio=
+n:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  Codex-maxxing for long-running work
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>Jason Liu uses Codex to maintain context and manage complex projects =
+over extended periods.</li>
+  <li>This approach matters because it enables continuous work beyond the l=
+imitations of a single prompt.</li>
+  <li>People working on long-running or complex tasks with AI assistance ar=
+e affected.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is evolving to support more sustained and context-aware interactio=
+ns for complex workflows.</li>
+  <li>A practical lesson for learners is to leverage AI tools like Codex to=
+ preserve context and improve project continuity.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Preserving context means keeping track of previous information so AI =
+can understand and build on earlier work without starting over each time.</=
+li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/codex-maxxing-long-running-work"sty=
+le=3D"background-color:#2563eb; color:#ffffff; padding:10px 14px; text-deco=
+ration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  Samsung Electronics brings ChatGPT and Codex to employees
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>Samsung Electronics has deployed ChatGPT Enterprise and Codex to its =
+employees globally.</li>
+  <li>This matters because it represents one of the largest enterprise AI r=
+ollouts by OpenAI, showcasing the growing integration of AI in corporate en=
+vironments.</li>
+  <li>The employees of Samsung Electronics worldwide are directly affected =
+by this deployment.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is increasingly being integrated into large enterprises to enhance=
+ productivity and innovation on a global scale.</li>
+  <li>A practical lesson for learners is to become familiar with AI tools l=
+ike ChatGPT and Codex, as they are becoming essential in modern workplaces.=
+</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>ChatGPT is an AI language model that can understand and generate huma=
+n-like text, helping users with tasks such as writing, coding, and answerin=
+g questions.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/samsung-electronics-chatgpt-codex-d=
+eployment"style=3D"background-color:#2563eb; color:#ffffff; padding:10px 14=
+px; text-decoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  New usage analytics and updated spend controls for enterprises
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>OpenAI has introduced new spend controls and usage analytics for Chat=
+GPT Enterprise.</li>
+  <li>This update matters because it helps organizations better manage AI c=
+osts and scale their usage confidently.</li>
+  <li>Enterprises using ChatGPT are the primary group affected by these new=
+ features.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards more transparent and manageable enterprise solut=
+ions that support cost control and scalability.</li>
+  <li>A practical lesson for learners is to understand the importance of mo=
+nitoring and controlling resource usage when deploying AI at scale.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Spend controls are tools that allow organizations to set limits on ho=
+w much they can spend on AI services, helping prevent unexpected costs.</li=
+>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/chatgpt-enterprise-spend-controls"s=
+tyle=3D"background-color:#2563eb; color:#ffffff; padding:10px 14px; text-de=
+coration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  Improving health intelligence in ChatGPT
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>GPT-5.5 Instant enhances ChatGPT's ability to provide health and well=
+ness information.</li>
+  <li>This improvement matters because it leads to more accurate, clear, an=
+d reliable health advice.</li>
+  <li>Users seeking health information and wellness guidance are directly a=
+ffected.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is advancing towards more specialized and trustworthy applications=
+ in critical fields like healthcare.</li>
+  <li>A practical lesson for learners is to focus on understanding how AI m=
+odels incorporate expert knowledge to improve accuracy.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Reasoning in AI refers to the model's ability to analyze information =
+logically to provide coherent and relevant responses.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/improving-health-intelligence-in-ch=
+atgpt"style=3D"background-color:#2563eb; color:#ffffff; padding:10px 14px; =
+text-decoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  Using AI to help physicians diagnose rare genetic diseases affecting chil=
+dren
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>Researchers used an OpenAI reasoning model to diagnose rare genetic d=
+iseases in children, resulting in 18 new diagnoses in previously unsolved c=
+ases.</li>
+  <li>This matters because it demonstrates how AI can assist in solving com=
+plex medical challenges that traditional methods have struggled with.</li>
+  <li>Children with rare genetic diseases and their physicians are directly=
+ affected by this advancement.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is advancing towards becoming a valuable tool in medical diagnosti=
+cs, especially for complex and rare conditions.</li>
+  <li>A practical lesson for learners is that integrating AI with expert kn=
+owledge can enhance problem-solving in specialized fields.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>An OpenAI reasoning model is a type of artificial intelligence that p=
+rocesses information and draws conclusions to assist in decision-making, si=
+milar to how a human might reason through a problem.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/diagnose-rare-childhood-diseases"st=
+yle=3D"background-color:#2563eb; color:#ffffff; padding:10px 14px; text-dec=
+oration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  A near-autonomous AI chemist improves a challenging reaction in medicinal=
+ chemistry
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>A near-autonomous AI chemist using GPT-5.4 improved a challenging rea=
+ction in medicinal chemistry.</li>
+  <li>This advancement matters because it accelerates drug development and =
+enhances research efficiency.</li>
+  <li>Researchers and patients awaiting new medicines are directly affected=
+ by this progress.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards greater autonomy in scientific research, enablin=
+g faster and more precise discoveries.</li>
+  <li>A practical lesson for learners is to explore how AI tools can assist=
+ in complex problem-solving within their fields.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>GPT-5.4 is an advanced language model that can understand and generat=
+e human-like text, which in this case helps design and optimize chemical re=
+actions.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/ai-chemist-improves-reaction"style=3D=
+"background-color:#2563eb; color:#ffffff; padding:10px 14px; text-decoratio=
+n:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  Introducing LifeSciBench
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>LifeSciBench is a new benchmark designed to evaluate AI systems on re=
+al-world life science research tasks and decisions.</li>
+  <li>It matters because it provides a standardized way to measure AI perfo=
+rmance in a critical scientific domain.</li>
+  <li>Researchers, AI developers, and the life science community are affect=
+ed by this benchmark.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is advancing towards more specialized and domain-specific applicat=
+ions, such as life sciences.</li>
+  <li>Learners should focus on understanding domain-specific benchmarks to =
+better evaluate AI capabilities in specialized fields.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>A benchmark is a set of tests or tasks used to measure and compare th=
+e performance of AI systems in a specific area.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/introducing-life-sci-bench"style=3D=
+"background-color:#2563eb; color:#ffffff; padding:10px 14px; text-decoratio=
+n:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  Predicting model behavior before release by simulating deployment
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>OpenAI has introduced Deployment Simulation to predict AI model behav=
+ior before deployment using real conversation data.</li>
+  <li>This matters because it enhances safety and accuracy in evaluating AI=
+ models before they are released.</li>
+  <li>The developers, users, and stakeholders of AI models are affected by =
+this advancement.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards more reliable and safer deployment through advan=
+ced pre-release testing methods.</li>
+  <li>A practical lesson for learners is to incorporate real-world data sim=
+ulations to better anticipate model performance and risks.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Deployment Simulation involves using real conversation data to mimic =
+how an AI model will behave in actual use, allowing developers to identify =
+potential issues before the model is publicly released.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/deployment-simulation"style=3D"back=
+ground-color:#2563eb; color:#ffffff; padding:10px 14px; text-decoration:non=
+e; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  Introducing the OpenAI Partner Network
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>OpenAI has launched the Partner Network with a $150 million investmen=
+t to support global partners in accelerating enterprise AI adoption and tra=
+nsformation.</li>
+  <li>This initiative matters because it aims to expand the use of AI techn=
+ologies in businesses worldwide, driving innovation and efficiency.</li>
+  <li>Enterprises and organizations looking to implement AI solutions are t=
+he primary groups affected by this development.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards broader enterprise integration with increased su=
+pport for partners to deploy AI solutions at scale.</li>
+  <li>A practical lesson for learners is to understand the importance of co=
+llaboration and partnerships in scaling AI technologies effectively.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>The concept of AI adoption in enterprises involves integrating artifi=
+cial intelligence tools into business processes to automate tasks, improve =
+decision-making, and enhance productivity.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/introducing-openai-partner-network"=
+style=3D"background-color:#2563eb; color:#ffffff; padding:10px 14px; text-d=
+ecoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  New OpenAI Academy courses for the next era of work
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>OpenAI has launched three new Academy courses focused on practical AI=
+ skills and workflows.</li>
+  <li>This matters because it equips people to effectively use AI in their =
+daily work environments.</li>
+  <li>Workers and learners aiming to integrate AI into their professional t=
+asks are affected.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards becoming an accessible tool that enhances everyd=
+ay work through practical applications.</li>
+  <li>A practical lesson for learners is to focus on building repeatable AI=
+ workflows to increase efficiency.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Agents in AI are automated programs that perform tasks on behalf of u=
+sers, helping to streamline complex workflows.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/academy-courses-applying-ai-at-work=
+"style=3D"background-color:#2563eb; color:#ffffff; padding:10px 14px; text-=
+decoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  How Preply combines AI and human tutors to personalize learning
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>Preply has integrated OpenAI technology to create AI-generated lesson=
+ summaries and personalized language learning exercises.</li>
+  <li>This matters because it enhances the learning experience by combining=
+ AI efficiency with human tutor expertise.</li>
+  <li>Language learners using Preply are directly affected by this innovati=
+on.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards more personalized and interactive educational to=
+ols that complement human instruction.</li>
+  <li>A practical lesson for learners is to leverage AI-generated feedback =
+to reinforce their understanding and practice.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>AI-generated lesson summaries use natural language processing to anal=
+yze and condense lesson content into concise feedback and exercises.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/preply"style=3D"background-color:#2=
+563eb; color:#ffffff; padding:10px 14px; text-decoration:none; border-radiu=
+s:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  BBVA puts AI at the core of banking with OpenAI
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>BBVA integrated ChatGPT Enterprise and partnered with OpenAI to enhan=
+ce its banking services using AI.</li>
+  <li>This matters because it accelerates the transformation of banking thr=
+ough advanced AI technologies.</li>
+  <li>The primary people affected are BBVA's 100,000 employees and their gl=
+obal banking customers.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is increasingly becoming central to industries like banking, drivi=
+ng innovation and efficiency at scale.</li>
+  <li>A practical lesson for learners is to understand how AI tools can be =
+adopted widely within large organizations to improve workflows.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>ChatGPT Enterprise is an AI language model that helps automate and en=
+hance communication by understanding and generating human-like text.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/bbva"style=3D"background-color:#256=
+3eb; color:#ffffff; padding:10px 14px; text-decoration:none; border-radius:=
+6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  How an astrophysicist uses Codex to help simulate black holes
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>Astrophysicist Chi-kwan Chan uses Codex to create simulations of blac=
+k holes.</li>
+  <li>This matters because it aids scientists in studying extreme physics a=
+nd testing Einstein=E2=80=99s theory of general relativity.</li>
+  <li>Scientists and researchers studying black holes and theoretical physi=
+cs are affected.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is advancing to assist in complex scientific simulations and resea=
+rch tasks.</li>
+  <li>Learners can benefit from using AI tools like Codex to simplify and a=
+ccelerate coding for scientific projects.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Codex is an AI model that helps generate computer code based on natur=
+al language instructions, making programming more accessible and efficient.=
+</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/using-codex-to-simulate-black-holes=
+"style=3D"background-color:#2563eb; color:#ffffff; padding:10px 14px; text-=
+decoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  Supporting Europe=E2=80=99s work in ensuring a trustworthy AI ecosystem=20
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>OpenAI supports the EU Code of Practice on AI content transparency to=
+ promote trustworthy AI.</li>
+  <li>This matters because it helps people understand and trust AI-generate=
+d content through clear provenance standards.</li>
+  <li>Users of AI technologies and the broader European community are affec=
+ted by these transparency efforts.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards greater transparency and accountability to build=
+ trust with users.</li>
+  <li>A practical lesson for learners is to prioritize understanding the so=
+urce and creation process of AI content.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Provenance in AI means tracking and documenting the origin and histor=
+y of AI-generated content to ensure its authenticity and reliability.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/supporting-eu-trustworthy-ai-ecosys=
+tem"style=3D"background-color:#2563eb; color:#ffffff; padding:10px 14px; te=
+xt-decoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  OpenAI to acquire Ona
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>OpenAI is acquiring Ona to enhance its Codex platform with secure, pe=
+rsistent cloud environments.</li>
+  <li>This acquisition matters because it enables long-running AI agents to=
+ operate effectively within enterprise workflows.</li>
+  <li>Businesses and enterprises using AI-driven workflows are the primary =
+groups affected by this development.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards more integrated, secure, and persistent cloud-ba=
+sed environments that support continuous and complex tasks.</li>
+  <li>A practical lesson for learners is to focus on understanding cloud co=
+mputing and AI integration to keep up with evolving AI applications.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Persistent cloud environments are secure online spaces where AI progr=
+ams can run continuously over time without interruption, allowing them to h=
+andle complex, ongoing tasks.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/openai-to-acquire-ona"style=3D"back=
+ground-color:#2563eb; color:#ffffff; padding:10px 14px; text-decoration:non=
+e; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  Access OpenAI models and Codex through your Oracle cloud commitment
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>Oracle Cloud now allows access to OpenAI models and Codex using exist=
+ing cloud commitments.</li>
+  <li>This integration matters because it enables enterprises to build and =
+deploy AI solutions securely with governance controls.</li>
+  <li>Businesses and developers using Oracle Cloud are the primary groups a=
+ffected by this update.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is moving towards greater integration with enterprise cloud platfo=
+rms to enhance security and governance.</li>
+  <li>A practical lesson for learners is to understand how cloud commitment=
+s can be leveraged to access advanced AI models efficiently.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Cloud commitment refers to a pre-agreed usage or spending level on cl=
+oud services, which can be used to access additional resources or services =
+like AI models without extra upfront costs.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/openai-on-oracle-cloud"style=3D"bac=
+kground-color:#2563eb; color:#ffffff; padding:10px 14px; text-decoration:no=
+ne; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><div style=3D"border:1px solid #e5e7eb; border-radius:10px; padding:1=
+8px; margin-bottom:20px; background-color:#fafafa;">
+
+  <p style=3D"font-size:13px; color:#2563eb; font-weight:bold; margin:0 0 8=
+px 0;">
+   NVIDIA
+  </p>
+
+  <h2 style=3D"font-size:20px; color:#111827; margin:0 0 12px 0;">
+  PRC-linked influence operations are targeting AI debates in the US
+  </h2>
+
+<div style=3D"font-size:15px; color:#374151; line-height:1.6; font-weight:n=
+ormal;">
+<h3>Summary</h3>
+<ul>
+  <li>A report from OpenAI reveals that PRC-linked influence operations are=
+ using AI to interfere in U.S. technology discussions.</li>
+  <li>This matters because it shows how AI can be exploited to spread misin=
+formation and influence public opinion on important tech issues.</li>
+  <li>The U.S. tech community, policymakers, and the general public are aff=
+ected by these influence operations.</li>
+</ul>
+
+<h3>Insight</h3>
+<ul>
+  <li>AI is increasingly being used not only for innovation but also as a t=
+ool in geopolitical influence and information warfare.</li>
+  <li>Learners should understand the importance of critically evaluating AI=
+-generated information and recognizing potential manipulation.</li>
+</ul>
+
+<h3>Technical concept</h3>
+<ul>
+  <li>Influence operations use AI algorithms to create and spread targeted =
+messages that can shape opinions and narratives in digital spaces.</li>
+</ul>
+  </div>
+
+  <p style=3D"margin-top:16px;">
+    <a href=3D"https://openai.com/index/prc-linked-influence-operations-ai-=
+debates"style=3D"background-color:#2563eb; color:#ffffff; padding:10px 14px=
+; text-decoration:none; border-radius:6px; font-size:14px;">
+      Read More
+    </a>
+  </p>
+
+</div><p style=3D"font-size:12px; color:#9ca3af; margin-top:25px; text-alig=
+n:center;">
+Generated automatically with Microsoft Power Automate and AI Builder.
+</p>
+
+</div>
+</div></p><p>If you want to unsubscribe from these emails, please use this =
+<a href=3D"https://aka.ms/flow-mail">form</a>.</p>=
